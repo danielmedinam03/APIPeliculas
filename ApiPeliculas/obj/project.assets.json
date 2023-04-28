@@ -4210,11 +4210,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\KUBIT\\Documents\\GitHub\\MASTER-API-RESTful-ASP.NETCORE\\ApiPeliculas\\ApiPeliculas.csproj",
+      "projectUniqueName": "C:\\Users\\KUBIT\\Documents\\GitHub\\MasterAPI\\ApiPeliculas\\ApiPeliculas.csproj",
       "projectName": "ApiPeliculas",
-      "projectPath": "C:\\Users\\KUBIT\\Documents\\GitHub\\MASTER-API-RESTful-ASP.NETCORE\\ApiPeliculas\\ApiPeliculas.csproj",
+      "projectPath": "C:\\Users\\KUBIT\\Documents\\GitHub\\MasterAPI\\ApiPeliculas\\ApiPeliculas.csproj",
       "packagesPath": "C:\\Users\\KUBIT\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\KUBIT\\Documents\\GitHub\\MASTER-API-RESTful-ASP.NETCORE\\ApiPeliculas\\obj\\",
+      "outputPath": "C:\\Users\\KUBIT\\Documents\\GitHub\\MasterAPI\\ApiPeliculas\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\KUBIT\\AppData\\Roaming\\NuGet\\NuGet.Config",

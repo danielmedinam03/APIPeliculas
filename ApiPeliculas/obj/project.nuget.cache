@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ee3lTgk18ACM9rJ743bBIOMG58APVhNdc4anhBTK2IvQ6JQUUaK8xeTmOVxEhGR9PWUhJsnfc+2DzoCFweVklA==",
+  "dgSpecHash": "ihy/h1oSctQQFlKjTNlSh22G+ZM0oDmJlWVGCStAP4OcdR8vcRBoDkNd5s3jq3NQ85IY81Usdurfof4hP7nxjw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\KUBIT\\Documents\\GitHub\\MASTER-API-RESTful-ASP.NETCORE\\ApiPeliculas\\ApiPeliculas.csproj",
+  "projectFilePath": "C:\\Users\\KUBIT\\Documents\\GitHub\\MasterAPI\\ApiPeliculas\\ApiPeliculas.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\KUBIT\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\KUBIT\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

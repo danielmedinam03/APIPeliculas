@@ -986,11 +986,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\KUBIT\\Documents\\GitHub\\MASTER-API-RESTful-ASP.NETCORE\\PeliculasWeeb\\PeliculasWeb.csproj",
+      "projectUniqueName": "C:\\Users\\KUBIT\\Documents\\GitHub\\MasterAPI\\PeliculasWeeb\\PeliculasWeb.csproj",
       "projectName": "PeliculasWeb",
-      "projectPath": "C:\\Users\\KUBIT\\Documents\\GitHub\\MASTER-API-RESTful-ASP.NETCORE\\PeliculasWeeb\\PeliculasWeb.csproj",
+      "projectPath": "C:\\Users\\KUBIT\\Documents\\GitHub\\MasterAPI\\PeliculasWeeb\\PeliculasWeb.csproj",
       "packagesPath": "C:\\Users\\KUBIT\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\KUBIT\\Documents\\GitHub\\MASTER-API-RESTful-ASP.NETCORE\\PeliculasWeeb\\obj\\",
+      "outputPath": "C:\\Users\\KUBIT\\Documents\\GitHub\\MasterAPI\\PeliculasWeeb\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\KUBIT\\AppData\\Roaming\\NuGet\\NuGet.Config",

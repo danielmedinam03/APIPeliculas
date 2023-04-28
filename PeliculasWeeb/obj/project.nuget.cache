@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "G53hWSIHix64UWGyd81cKvU0u4W2MQwXW5vjs+Z0lFJQGkaWUMZKnrrfppjVgnvGwPcMApfGcuZUooVk24yj8g==",
+  "dgSpecHash": "BoPxXbCOnIaeG9eI/Ijt5px8/FwfvsHoKAQiIiRqJJa3CtGZLCoNPWxpb+OockOnBzT0/F4j5PouujLXEcyuxA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\KUBIT\\Documents\\GitHub\\MASTER-API-RESTful-ASP.NETCORE\\PeliculasWeeb\\PeliculasWeb.csproj",
+  "projectFilePath": "C:\\Users\\KUBIT\\Documents\\GitHub\\MasterAPI\\PeliculasWeeb\\PeliculasWeb.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\KUBIT\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor.extensions\\6.0.16\\microsoft.aspnetcore.mvc.razor.extensions.6.0.16.nupkg.sha512",
     "C:\\Users\\KUBIT\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor.runtimecompilation\\6.0.16\\microsoft.aspnetcore.mvc.razor.runtimecompilation.6.0.16.nupkg.sha512",
