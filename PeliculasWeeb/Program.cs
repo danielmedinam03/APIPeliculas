@@ -1,3 +1,6 @@
+using PeliculasWeb.Repository;
+using PeliculasWeb.Repository.IRepository;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -9,6 +12,9 @@ builder.Services.AddHttpClient();
 //Llamada al Razor - RunTimeCompilation
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
+builder.Services.AddScoped<IPeliculaRepository, PeliculaRepository>();
+builder.Services.AddScoped<IUsuarioRepository,UsuarioRepository>();
+builder.Services.AddScoped<ICategoriaRepository,CategoriaRepository>();
 
 var app = builder.Build();
 
