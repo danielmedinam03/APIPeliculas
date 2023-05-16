@@ -6,7 +6,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddControllersWithViews();
 //Llamados Http
 builder.Services.AddHttpClient();
 //Llamada al Razor - RunTimeCompilation
@@ -15,6 +14,14 @@ builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddScoped<IPeliculaRepository, PeliculaRepository>();
 builder.Services.AddScoped<IUsuarioRepository,UsuarioRepository>();
 builder.Services.AddScoped<ICategoriaRepository,CategoriaRepository>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        policy => policy.AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowAnyOrigin());
+});
 
 var app = builder.Build();
 
@@ -30,13 +37,15 @@ app.UseStaticFiles();
 
 app.UseRouting();
 //Llamado de cors
-app.UseCors(x => x
-    .AllowAnyOrigin()
-    .AllowAnyMethod()
-    .AllowAnyHeader()
-    );
+//app.UseCors(x => x
+//    .AllowAnyOrigin()
+//    .AllowAnyMethod()
+//    .AllowAnyHeader()
+//    );
 
 
+//Soporte para CORS
+app.UseCors("AllowAll");
 app.UseAuthorization();
 
 app.MapControllerRoute(

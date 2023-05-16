@@ -1,6 +1,9 @@
-﻿namespace PeliculasWeb.Repository.IRepository
+﻿using PeliculasWeb.Models;
+
+namespace PeliculasWeb.Repository.IRepository
 {
-    public interface ICategoriaRepositorio
+    public interface ICategoriaRepository : IBaseRepository<Categoria>
     {
+
     }
 }

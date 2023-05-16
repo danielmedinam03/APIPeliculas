@@ -14,7 +14,6 @@ namespace PeliculasWeb.Models
         public enum TipoClasificacion { Siete, Trece, Dieciseis, Dieciocho }
         public TipoClasificacion Clasificacion { get; set; }
         public DateTime FechaCreacion { get; set; }
-        [ForeignKey("CategoriaId")]
         public int CategoriaId { get; set; }
         public Categoria Categoria { get; set; }
     }
