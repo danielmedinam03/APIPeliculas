@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewData["Title"] = "Lista de peliculas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container p-4">
+
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-primary">Listado de peliculas</h2>
+        </div>
+        <div class="col-6">
+            <a asp-action="Create" class="btn btn-success">Crear nueva pelicula</a>
+        </div>
+    </div>
+
+    <br />
+    <br />
+    <div class="p-3">
+        <table id="tblPeliculas" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Nombre categoria</td>
+                    <td>Descripción</td>
+                    <td style="width:100%">Clasificacion</td>
+                    <td>Duración</td>
+                    <td>Acción</td>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+</div>
+
+
+@section Scripts{
+    <script src="~/js/Peliculas.js"></script>
+}

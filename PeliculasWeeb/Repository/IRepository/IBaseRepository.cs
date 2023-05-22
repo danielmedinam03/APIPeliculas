@@ -36,5 +36,19 @@
         /// <param name="Id"></param>
         /// <returns></returns>
         public Task<bool> DeleteAsync(string url, int Id);
+        /// <summary>
+        ///  Metodo para buscar peliculas en categoria
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="categoriaId"></param>
+        /// <returns></returns>
+        public Task<IEnumerable<T>> GetPeliculasEnCategoriasAsync(string url, int categoriaId);
+        /// <summary>
+        /// Metodo para buscar por nombre
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="nombre"></param>
+        /// <returns></returns>
+        public Task<IEnumerable<T>> Buscar(string url, string nombre);
     }
 }

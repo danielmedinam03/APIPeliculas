@@ -29,6 +29,7 @@ namespace PeliculasWeb.Controllers
         }
         
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Categoria categoria)
         {
             if (ModelState.IsValid) 
@@ -40,14 +41,14 @@ namespace PeliculasWeb.Controllers
         }
         
         [HttpGet]
-        public async Task<IActionResult> Edit(int? IdCategoria)
+        public async Task<IActionResult> Edit(int? Id)
         {
             Categoria categoria = new();
-            if (IdCategoria == null) 
+            if (Id == null) 
             {
                 return NotFound();
             }
-            categoria = await _categoriaRepository.GetByIdAsync(CT.RutaCategoriasApi,IdCategoria.GetValueOrDefault());
+            categoria = await _categoriaRepository.GetByIdAsync(CT.RutaCategoriasApi,Id.GetValueOrDefault());
             if (categoria == null)
             {
                 return NotFound();
@@ -59,10 +60,20 @@ namespace PeliculasWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _categoriaRepository.UpdateAsync(CT.RutaCategoriasApi, categoria);
+                await _categoriaRepository.UpdateAsync(CT.RutaCategoriasApi + categoria.Id, categoria);
                 return RedirectToAction(nameof(Index));
             }
             return View();
+        }
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int Id)
+        {
+            var status = await _categoriaRepository.DeleteAsync(CT.RutaCategoriasApi,Id);
+
+            if (status is true)
+                return Json(new { succes = true,message = "Borrado Correctamente"});
+
+            return Json(new { succes = true, message = "Error al borrar" });
         }
 
     }

@@ -1,7 +1,18 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using PeliculasWeb.Repository;
 using PeliculasWeb.Repository.IRepository;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.Cookie.HttpOnly = true;
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+        options.LoginPath = "/Home/Login";
+        options.AccessDeniedPath = "/Home/AccessDenied";
+        options.SlidingExpiration = true;
+    });
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -14,6 +25,7 @@ builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddScoped<IPeliculaRepository, PeliculaRepository>();
 builder.Services.AddScoped<IUsuarioRepository,UsuarioRepository>();
 builder.Services.AddScoped<ICategoriaRepository,CategoriaRepository>();
+builder.Services.AddScoped<IAccountRepository,AccountRepository>();
 
 builder.Services.AddCors(options =>
 {
@@ -21,6 +33,13 @@ builder.Services.AddCors(options =>
         policy => policy.AllowAnyHeader()
         .AllowAnyMethod()
         .AllowAnyOrigin());
+});
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(10);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
 });
 
 var app = builder.Build();
@@ -46,6 +65,8 @@ app.UseRouting();
 
 //Soporte para CORS
 app.UseCors("AllowAll");
+app.UseSession();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

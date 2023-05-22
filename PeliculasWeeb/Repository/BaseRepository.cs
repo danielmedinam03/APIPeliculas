@@ -40,6 +40,7 @@ namespace PeliculasWeb.Repository
             }
         }
 
+
         public async Task<bool> DeleteAsync(string url, int Id)
         {
             var peticion = new HttpRequestMessage(HttpMethod.Delete, url + Id);
@@ -123,5 +124,48 @@ namespace PeliculasWeb.Repository
             }
 
         }
+
+        public async Task<IEnumerable<T>> GetPeliculasEnCategoriasAsync(string url, int categoriaId)
+        {
+            var peticion = new HttpRequestMessage(HttpMethod.Get, url + categoriaId);
+
+            var cliente = _httpClientFactory.CreateClient();
+            HttpResponseMessage response = await cliente.SendAsync(peticion);
+
+            //Validar si se encontraron y retornar los datos
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var jsonString = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<IEnumerable<T>>(jsonString);
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
+        public async Task<IEnumerable<T>> Buscar(string url, string nombre)
+        {
+            var peticion = new HttpRequestMessage(HttpMethod.Get, url + nombre);
+
+            var cliente = _httpClientFactory.CreateClient();
+            HttpResponseMessage response = await cliente.SendAsync(peticion);
+
+            //Validar si se encontraron y retornar los datos
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var jsonString = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<IEnumerable<T>>(jsonString);
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
     }
 }
