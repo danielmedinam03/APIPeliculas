@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\KUBIT\\Documents\\GitHub\\MasterAPI\\PeliculasWeeb\\wwwroot\\imagenes\\banner-peliculas-api.jpg",
+      "PackagePath": "staticwebassets\\imagenes\\banner-peliculas-api.jpg"
+    },
+    {
       "Id": "C:\\Users\\KUBIT\\Documents\\GitHub\\MasterAPI\\PeliculasWeeb\\wwwroot\\js\\Categorias.js",
       "PackagePath": "staticwebassets\\js\\Categorias.js"
     },

@@ -13,7 +13,7 @@ namespace PeliculasWeb.Repository
         {
             _httpClientFactory = httpClientFactory;
         }
-        public async Task<bool> AddAsync(string url, T entidad)
+        public async Task<bool> AddAsync(string url, T entidad, string token ="")
         {
             var peticion = new HttpRequestMessage(HttpMethod.Post, url);
             if (entidad != null)
@@ -28,6 +28,10 @@ namespace PeliculasWeb.Repository
             }
 
             var cliente = _httpClientFactory.CreateClient();
+            if (token!= null && token.Length != 0)
+            {
+                cliente.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+            }
             HttpResponseMessage response = await cliente.SendAsync(peticion);
 
             if (response.StatusCode == System.Net.HttpStatusCode.Created)
@@ -41,14 +45,18 @@ namespace PeliculasWeb.Repository
         }
 
 
-        public async Task<bool> DeleteAsync(string url, int Id)
+        public async Task<bool> DeleteAsync(string url, int Id, string token = "")
         {
             var peticion = new HttpRequestMessage(HttpMethod.Delete, url + Id);
             
             var cliente = _httpClientFactory.CreateClient();
+            if (token != null && token.Length != 0)
+            {
+                cliente.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+            }
             HttpResponseMessage response = await cliente.SendAsync(peticion);
 
-            if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 return true;
             }
@@ -96,7 +104,7 @@ namespace PeliculasWeb.Repository
 
         }
 
-        public async Task<bool> UpdateAsync(string url, T entidad)
+        public async Task<bool> UpdateAsync(string url, T entidad, string token = "")
         {
             var peticion = new HttpRequestMessage(HttpMethod.Patch, url);
             if (entidad != null)
@@ -112,6 +120,10 @@ namespace PeliculasWeb.Repository
             }
 
             var cliente = _httpClientFactory.CreateClient();
+            if (token != null && token.Length != 0)
+            {
+                cliente.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+            }
             HttpResponseMessage response = await cliente.SendAsync(peticion);
 
             if (response.StatusCode == System.Net.HttpStatusCode.NoContent)

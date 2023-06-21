@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using PeliculasWeb.Models;
+using PeliculasWeb.Models.ViewModels;
 using PeliculasWeb.Repository.IRepository;
 using PeliculasWeb.Utils;
 using System.Diagnostics;
@@ -13,23 +14,44 @@ namespace PeliculasWeb.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IAccountRepository _accountRepository;
-        public HomeController(ILogger<HomeController> logger, IAccountRepository accountRepository)
+
+        private readonly IPeliculaRepository _repositoryPelicula;
+        private readonly ICategoriaRepository _repositoryCategoria;
+        public HomeController(ILogger<HomeController> logger, IAccountRepository accountRepository,
+            IPeliculaRepository repositoryPelicula, ICategoriaRepository categoriaRepository)
         {
             _logger = logger;
             _accountRepository = accountRepository;
+            _repositoryCategoria = categoriaRepository;
+            _repositoryPelicula = repositoryPelicula;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            IndexVM listaPleiculasCategoria = new()
+            {
+                ListaCategorias = await _repositoryCategoria.GetAllAsync(CT.RutaCategoriasApi),
+                ListaPeliculas = await _repositoryPelicula.GetAllAsync(CT.RutaPeliculasApi)
+            };
+            return View(listaPleiculasCategoria);
         }
 
+        public async Task<IActionResult> IndexCategoria(int id)
+        {
+            var peliculaEnCategoria = await _repositoryPelicula.GetPeliculasEnCategoriasAsync(CT.RutaPeliculasEnCategoriasApi + id,id);
+            return View(peliculaEnCategoria);
+        }
+        public async Task<IActionResult> IndexBusqueda(string nombre)
+        {
+            var peliculasEncontradas = await _repositoryPelicula.Buscar(CT.RutaPeliculasApiBusqueda,nombre);
+            return View(peliculasEncontradas);
+        }
         public IActionResult Privacy()
         {
             return View();
         }
         [HttpGet]
-        public IActionResult Login()
+        public async Task<IActionResult> Login()
         {
             return View(new UsuarioM());
         }
@@ -61,10 +83,31 @@ namespace PeliculasWeb.Controllers
                 return View(new UsuarioM());
             }
         }
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            HttpContext.Session.SetString("JWToken","");
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpGet]
         public IActionResult Registro()
         {
             return View();
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Registro(UsuarioM usuario)
+        {
+            bool result = await _accountRepository.RegisterAsync(CT.RutaUsuariosApi + "Registro",usuario);
+            if (!result)
+            {
+                return View();
+            }
+            TempData["alert"] = "Registro correcto !";
+            return RedirectToAction(nameof(Login));
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

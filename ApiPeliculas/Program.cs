@@ -112,11 +112,19 @@ builder.Services.AddSwaggerGen(options =>
 3: cualquier dominio, teniendo en cuenta la seguridad
 (*) Se usa para todos los dominios
  */
-builder.Services.AddCors(p => p.AddPolicy("PolicyCors", build =>
-{
-    build.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
-}));
+//builder.Services.AddCors(p => p.AddPolicy("PolicyCors", build =>
+//{
+//    build.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+//}));
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAnyPort",
+        builder => builder
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -129,7 +137,8 @@ if (app.Environment.IsProduction())
 app.UseHttpsRedirection();
 
 //Soporte para CORS
-app.UseCors("PolicyCors");
+//app.UseCors("PolicyCors");
+app.UseCors("AllowAnyPort");
 //Se añade la autenticacion
 app.UseAuthentication();
 app.UseAuthorization();

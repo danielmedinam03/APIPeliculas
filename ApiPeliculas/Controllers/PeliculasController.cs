@@ -94,7 +94,7 @@ namespace ApiPeliculas.Controllers
             return Ok(dataDto);
 
         }
-        [Authorize(Roles ="admin")]
+        //[Authorize(Roles ="admin")]
         [HttpPost]
         [ProducesResponseType(201, Type = typeof(PeliculaDTO))]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -103,7 +103,23 @@ namespace ApiPeliculas.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> CreatePeliculas([FromBody] PeliculaDTO Dto)
         {
-            Pelicula pelicula = _mapper.Map<Pelicula>(Dto);
+            var memoryStream = new MemoryStream();
+
+            Dto.RutaImagen.CopyTo(memoryStream);
+
+
+            Pelicula pelicula = new()
+            {
+                CategoriaId=Dto.CategoriaId,
+                Clasificacion=Dto.Clasificacion,
+                Descripcion=Dto.Descripcion,
+                Duracion=Dto.Duracion,
+                FechaCreacion=Dto.FechaCreacion,
+                Id=Dto.Id,
+                Nombre=Dto.Nombre,
+                RutaImagen = memoryStream.ToArray()
+            };
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -120,7 +136,7 @@ namespace ApiPeliculas.Controllers
             var data = await _peliculaService.AddAsync(pelicula);
             return Ok(data);
         }
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         [HttpPatch("{Id}")]
         [ProducesResponseType(201, Type = typeof(PeliculaDTO))]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -153,7 +169,7 @@ namespace ApiPeliculas.Controllers
             var data = await _peliculaService.UpdateAsync(pelicula);
             return Ok(data);
         }
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         [HttpDelete("{Id}")]
         [ProducesResponseType(201, Type = typeof(PeliculaDTO))]
         [ProducesResponseType(StatusCodes.Status201Created)]

@@ -23,7 +23,7 @@ namespace ApiPeliculas.Controllers
             this._respuestaApi = new();
             _mapper = mapper;
         }
-        [Authorize(Roles ="admin")]
+        //[Authorize(Roles ="admin")]
         [HttpGet]
         [ProducesResponseType(201, Type = typeof(PeliculaDTO))]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -40,7 +40,7 @@ namespace ApiPeliculas.Controllers
             }
             return Ok(listDTO);
         }
-        [Authorize(Roles ="admin")]
+        //[Authorize(Roles ="admin")]
         [HttpGet("{Id}")]
         [ProducesResponseType(201, Type = typeof(PeliculaDTO))]
         [ProducesResponseType(StatusCodes.Status201Created)]

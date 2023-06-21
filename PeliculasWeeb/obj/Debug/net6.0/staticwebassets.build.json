@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "sC94LDlAtCfFRc3wvplcAHym3kdjUhmpP4VXD65cS9Q=",
+  "Hash": "JOUHp+qd54i5/ZPtcp3ZcedigWNCmbuFIttrqrHUtL4=",
   "Source": "PeliculasWeb",
   "BasePath": "_content/PeliculasWeb",
   "Mode": "Default",
@@ -83,6 +83,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\KUBIT\\Documents\\GitHub\\MasterAPI\\PeliculasWeeb\\wwwroot\\imagenes\\banner-peliculas-api.jpg",
+      "SourceId": "PeliculasWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\KUBIT\\Documents\\GitHub\\MasterAPI\\PeliculasWeeb\\wwwroot\\",
+      "BasePath": "_content/PeliculasWeb",
+      "RelativePath": "imagenes/banner-peliculas-api.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\imagenes\\banner-peliculas-api.jpg"
     },
     {
       "Identity": "C:\\Users\\KUBIT\\Documents\\GitHub\\MasterAPI\\PeliculasWeeb\\wwwroot\\js\\Categorias.js",

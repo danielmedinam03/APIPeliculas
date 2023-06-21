@@ -21,21 +21,21 @@
         /// <param name="url"></param>
         /// <param name="entidad"></param>
         /// <returns></returns>
-        public Task<bool> AddAsync(string url, T entidad);
+        public Task<bool> AddAsync(string url, T entidad, string token);
         /// <summary>
         /// Método que actualiza un valor anteriormente creado
         /// </summary>
         /// <param name="url"></param>
         /// <param name="entidad"></param>
         /// <returns></returns>
-        public Task<bool> UpdateAsync(string url, T entidad);
+        public Task<bool> UpdateAsync(string url, T entidad, string token);
         /// <summary>
         /// Método que elimina un valor especifico
         /// </summary>
         /// <param name="url"></param>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public Task<bool> DeleteAsync(string url, int Id);
+        public Task<bool> DeleteAsync(string url, int Id, string token);
         /// <summary>
         ///  Metodo para buscar peliculas en categoria
         /// </summary>

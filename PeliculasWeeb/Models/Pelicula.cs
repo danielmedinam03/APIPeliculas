@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
 
 namespace PeliculasWeb.Models
 {
@@ -8,7 +9,7 @@ namespace PeliculasWeb.Models
         [Key]
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public byte[] RutaImagen { get; set; }
+        public byte[] RutaImagen { get; set; }        
         public string Descripcion { get; set; }
         public int Duracion { get; set; }
         public enum TipoClasificacion { Siete, Trece, Dieciseis, Dieciocho }

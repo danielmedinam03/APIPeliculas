@@ -1,26 +1,14 @@
 ﻿@model PeliculasWeb.Models.UsuarioM
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Registro";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 class="text-center">Acceso de usuarios</h1>
-<div class="row mt-4">
-    <div class="col-sm-12">
-        @if (TempData["alert"]!= null)
-        {
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <h5> <strong>@TempData["alert"]</strong> </h5>
-                <button type="button" class="close" data-dismiss="alert" arial-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        }
-    </div>
-</div>
+<h1 class="text-center">Registro de usuarios</h1>
+
 <div class="row">
     <div class="col-sm-6 offset-3">
-        <form asp-action="Login" method="post">
+        <form asp-action="Registro" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label for="Usuario">Usuario:</label>
@@ -33,9 +21,8 @@
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <br />
-            <button type="submit" class="btn-primary w-100">Ingresar</button>
+            <button type="submit" class="btn-primary w-100">Registrarse</button>
         </form>
-        
+
     </div>
 </div>
-

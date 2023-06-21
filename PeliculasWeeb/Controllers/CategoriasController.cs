@@ -34,7 +34,7 @@ namespace PeliculasWeb.Controllers
         {
             if (ModelState.IsValid) 
             {
-                await _categoriaRepository.AddAsync(CT.RutaCategoriasApi,categoria);
+                await _categoriaRepository.AddAsync(CT.RutaCategoriasApi,categoria,HttpContext.Session.GetString("JWToken"));
                 return RedirectToAction(nameof(Index));
             }
             return View();
@@ -60,7 +60,7 @@ namespace PeliculasWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _categoriaRepository.UpdateAsync(CT.RutaCategoriasApi + categoria.Id, categoria);
+                await _categoriaRepository.UpdateAsync(CT.RutaCategoriasApi + categoria.Id, categoria, HttpContext.Session.GetString("JWToken"));
                 return RedirectToAction(nameof(Index));
             }
             return View();
@@ -68,11 +68,10 @@ namespace PeliculasWeb.Controllers
         [HttpDelete]
         public async Task<IActionResult> Delete(int Id)
         {
-            var status = await _categoriaRepository.DeleteAsync(CT.RutaCategoriasApi,Id);
+            var status = await _categoriaRepository.DeleteAsync(CT.RutaCategoriasApi,Id, HttpContext.Session.GetString("JWToken"));
 
             if (status is true)
-                return Json(new { succes = true,message = "Borrado Correctamente"});
-
+                return Json(new { succes = true,message = "Borrado Correctamente",});
             return Json(new { succes = true, message = "Error al borrar" });
         }
 

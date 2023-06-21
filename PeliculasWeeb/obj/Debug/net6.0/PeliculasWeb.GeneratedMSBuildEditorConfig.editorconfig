@@ -32,12 +32,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/KUBIT/Documents/GitHub/MasterAPI/PeliculasWeeb/Views/Home/IndexBusqueda.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleEJ1c3F1ZWRhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/KUBIT/Documents/GitHub/MasterAPI/PeliculasWeeb/Views/Home/IndexCategoria.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleENhdGVnb3JpYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/KUBIT/Documents/GitHub/MasterAPI/PeliculasWeeb/Views/Home/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/KUBIT/Documents/GitHub/MasterAPI/PeliculasWeeb/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/KUBIT/Documents/GitHub/MasterAPI/PeliculasWeeb/Views/Home/Registro.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZWdpc3Ryby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/KUBIT/Documents/GitHub/MasterAPI/PeliculasWeeb/Views/Peliculas/Create.cshtml]

@@ -57,7 +57,7 @@ namespace ApiPeliculas.Controllers
             return Ok(dataDto);
 
         }
-        [Authorize(Roles ="admin")]
+        //[Authorize(Roles ="admin")]
         [HttpPost]
         [ProducesResponseType(201, Type = typeof(CategoriaDTO))]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -83,7 +83,7 @@ namespace ApiPeliculas.Controllers
             var data = await _categoriaService.AddAsync(categoria);
             return Ok(data);
         }
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         [HttpPatch("{Id}")]
         [ProducesResponseType(201, Type = typeof(CategoriaDTO))]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -116,7 +116,7 @@ namespace ApiPeliculas.Controllers
             var data = await _categoriaService.UpdateAsync(categoria);
             return Ok(data);
         }
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         [HttpDelete("{Id}")]
         [ProducesResponseType(201, Type = typeof(CategoriaDTO))]
         [ProducesResponseType(StatusCodes.Status201Created)]

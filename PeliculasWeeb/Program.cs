@@ -26,13 +26,15 @@ builder.Services.AddScoped<IPeliculaRepository, PeliculaRepository>();
 builder.Services.AddScoped<IUsuarioRepository,UsuarioRepository>();
 builder.Services.AddScoped<ICategoriaRepository,CategoriaRepository>();
 builder.Services.AddScoped<IAccountRepository,AccountRepository>();
+builder.Services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll",
-        policy => policy.AllowAnyHeader()
-        .AllowAnyMethod()
-        .AllowAnyOrigin());
+    options.AddPolicy("AllowAnyPort",
+        builder => builder
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
 });
 
 builder.Services.AddSession(options =>
@@ -64,7 +66,7 @@ app.UseRouting();
 
 
 //Soporte para CORS
-app.UseCors("AllowAll");
+app.UseCors("AllowAnyPort");
 app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
