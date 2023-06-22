@@ -72,7 +72,7 @@ namespace ApiPeliculas.Controllers
 
             var data = await _service.Login(Dto);
 
-            if (data.Usuario is null || data.Token is null)
+            if (data.NombreUsuario is null || data.Password is null || data.Token is null)
             {
                 _respuestaApi.StatusCode = HttpStatusCode.BadRequest;
                 _respuestaApi.IsSuccess = false;
@@ -89,7 +89,7 @@ namespace ApiPeliculas.Controllers
             }
             _respuestaApi.StatusCode = HttpStatusCode.OK;
             _respuestaApi.Result = data;
-            return Ok(_respuestaApi);
+            return Ok(data);
         }
         //[Authorize(Roles = "admin")]
         [HttpGet]

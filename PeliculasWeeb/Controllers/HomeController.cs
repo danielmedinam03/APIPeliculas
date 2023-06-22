@@ -69,12 +69,12 @@ namespace PeliculasWeb.Controllers
                 }
 
                 var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
-                identity.AddClaim(new Claim(ClaimTypes.Name, objUser.userName));
+                identity.AddClaim(new Claim(ClaimTypes.Name, objUser.NombreUsuario));
                 var principal = new ClaimsPrincipal(identity);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
                 HttpContext.Session.SetString("JWToken", objUser.token);
-                TempData["alert"] = $"Bienvenido/a  {objUser.userName}!";
+                TempData["alert"] = $"Bienvenido/a  {objUser.NombreUsuario}!";
                 return RedirectToAction(nameof(Index));
 
             }

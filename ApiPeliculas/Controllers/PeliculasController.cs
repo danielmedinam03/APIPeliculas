@@ -162,11 +162,11 @@ namespace ApiPeliculas.Controllers
                 ModelState.AddModelError("", "La categoría no existe");
                 return StatusCode(404, ModelState);
             }
-            if (await _peliculaService.ExistNameAsync(pelicula.Nombre))
-            {
-                ModelState.AddModelError("", "Ya existe una categoria con ese nombre");
-                return StatusCode(404, ModelState);
-            }
+            //if (await _peliculaService.ExistNameAsync(pelicula.Nombre))
+            //{
+            //    ModelState.AddModelError("", "Ya existe una categoria con ese nombre");
+            //    return StatusCode(404, ModelState);
+            //}
             var data = await _peliculaService.UpdateAsync(pelicula);
             return Ok(data);
         }

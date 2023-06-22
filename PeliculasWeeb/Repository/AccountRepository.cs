@@ -39,6 +39,8 @@ namespace PeliculasWeb.Repository
             }
             else
             {
+                var jsonString = await response.Content.ReadAsStringAsync();
+
                 return new UsuarioM();
             }
 

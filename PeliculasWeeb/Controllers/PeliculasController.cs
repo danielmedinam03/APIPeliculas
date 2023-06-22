@@ -56,7 +56,7 @@ namespace PeliculasWeb.Controllers
             var memoryStream = new MemoryStream();
             
             pelicula.RutaImagen.CopyTo(memoryStream);
-            
+            var imagenPelicula = memoryStream.ToArray();
 
             Pelicula peliculaEntity = new()
             {
@@ -67,7 +67,7 @@ namespace PeliculasWeb.Controllers
                 Duracion = pelicula.Duracion,
                 FechaCreacion = pelicula.FechaCreacion,
                 Nombre = pelicula.Nombre,
-                RutaImagen = memoryStream.ToArray()
+                RutaImagen = Convert.ToBase64String(imagenPelicula),
             };
 
             IEnumerable<Categoria> npList = await _repositoryCategoria.GetAllAsync(CT.RutaCategoriasApi);
@@ -83,8 +83,8 @@ namespace PeliculasWeb.Controllers
 
             };
 
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 //var files = HttpContext.Request.Form.Files;
                 //if (files.Count > 0)
                 //{
@@ -97,7 +97,7 @@ namespace PeliculasWeb.Controllers
                 //            p1 = ms1.ToArray();
                 //        }
                 //    }
-                //    pelicula.RutaImagen = p1;
+                //    peliculaEntity.RutaImagen = p1;
                 //}
                 //else
                 //{
@@ -107,8 +107,8 @@ namespace PeliculasWeb.Controllers
                 await _repository.AddAsync(CT.RutaPeliculasApi, peliculaEntity, HttpContext.Session.GetString("JWToken"));
                 return RedirectToAction(nameof(Index));
 
-            }
-            return View(objVM);
+            //}
+            //return View(objVM);
         }
 
         [HttpGet]
@@ -143,8 +143,25 @@ namespace PeliculasWeb.Controllers
 
         }
         [HttpPost]
-        public async Task<IActionResult> Update(Pelicula pelicula)
+        public async Task<IActionResult> Update(PeliculaDTO pelicula)
         {
+            var memoryStream = new MemoryStream();
+
+            pelicula.RutaImagen.CopyTo(memoryStream);
+            var imagenPelicula = memoryStream.ToArray();
+
+            Pelicula peliculaEntity = new()
+            {
+                Id = pelicula.Id,
+                CategoriaId = pelicula.CategoriaId,
+                Clasificacion = pelicula.Clasificacion,
+                Descripcion = pelicula.Descripcion,
+                Duracion = pelicula.Duracion,
+                FechaCreacion = pelicula.FechaCreacion,
+                Nombre = pelicula.Nombre,
+                RutaImagen = Convert.ToBase64String(imagenPelicula),
+            };
+
             IEnumerable<Categoria> npList = await _repositoryCategoria.GetAllAsync(CT.RutaCategoriasApi);
             PeliculasVM objVM = new()
             {
@@ -154,37 +171,37 @@ namespace PeliculasWeb.Controllers
                     Value = x.Id.ToString()
                 }),
 
-                Pelicula = new Pelicula()
+                Pelicula = peliculaEntity
 
             };
 
-            if (ModelState.IsValid)
-            {
-                var files = HttpContext.Request.Form.Files;
-                if (files.Count > 0)
-                {
-                    byte[] p1 = null;
-                    using (var fs1 = files[0].OpenReadStream())
-                    {
-                        using (var ms1 = new MemoryStream())
-                        {
-                            fs1.CopyTo(ms1);
-                            p1 = ms1.ToArray();
-                        }
-                    }
-                    pelicula.RutaImagen = p1;
-                }
-                else
-                {
-                    var peliculaDB = await _repository.GetByIdAsync(CT.RutaPeliculasApi, pelicula.Id);
-                    pelicula.RutaImagen = peliculaDB.RutaImagen;
-                }
+            //if (ModelState.IsValid)
+            //{
+                //var files = HttpContext.Request.Form.Files;
+                //if (files.Count > 0)
+                //{
+                //    byte[] p1 = null;
+                //    using (var fs1 = files[0].OpenReadStream())
+                //    {
+                //        using (var ms1 = new MemoryStream())
+                //        {
+                //            fs1.CopyTo(ms1);
+                //            p1 = ms1.ToArray();
+                //        }
+                //    }
+                //    pelicula.RutaImagen = p1;
+                //}
+                //else
+                //{
+                //    var peliculaDB = await _repository.GetByIdAsync(CT.RutaPeliculasApi, pelicula.Id);
+                //    pelicula.RutaImagen = peliculaDB.RutaImagen;
+                //}
 
-                await _repository.UpdateAsync(CT.RutaPeliculasApi + pelicula.Id, pelicula, HttpContext.Session.GetString("JWToken"));
+                await _repository.UpdateAsync(CT.RutaPeliculasApi + pelicula.Id, peliculaEntity, HttpContext.Session.GetString("JWToken"));
                 return RedirectToAction(nameof(Index));
 
-            }
-            return View();
+            //}
+            //return RedirectToAction(nameof(Index));
         }
         [HttpDelete]
         public async Task<IActionResult> Delete(int Id)

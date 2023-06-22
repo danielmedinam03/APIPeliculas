@@ -59,7 +59,9 @@ namespace ApiPeliculas.Service.AppUsuarioService
                 return new AppUsuarioLoginRespuestaDTO()
                 {
                     Token = "",
-                    Usuario = null
+                    NombreUsuario = "",
+                    Password = "",
+                    Id = ""
                 };
             }
             var manejadorToken = new JwtSecurityTokenHandler();
@@ -80,7 +82,9 @@ namespace ApiPeliculas.Service.AppUsuarioService
             AppUsuarioLoginRespuestaDTO usuarioRepuestaLoginDto = new AppUsuarioLoginRespuestaDTO()
             {
                 Token = manejadorToken.WriteToken(token),
-                Usuario = _mapper.Map<UsuarioDatoDTO>(usuario)
+                NombreUsuario = usuario.UserName,
+                Password = usuario.PasswordHash,
+                Id = usuario.Id
             };
             return usuarioRepuestaLoginDto;
         }
