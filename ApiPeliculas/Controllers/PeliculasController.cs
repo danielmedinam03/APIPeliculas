@@ -103,9 +103,9 @@ namespace ApiPeliculas.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> CreatePeliculas([FromBody] PeliculaDTO Dto)
         {
-            var memoryStream = new MemoryStream();
+            //var memoryStream = new MemoryStream();
 
-            Dto.RutaImagen.CopyTo(memoryStream);
+            //Dto.RutaImagen.CopyTo(memoryStream);
 
 
             Pelicula pelicula = new()
@@ -117,7 +117,8 @@ namespace ApiPeliculas.Controllers
                 FechaCreacion=Dto.FechaCreacion,
                 Id=Dto.Id,
                 Nombre=Dto.Nombre,
-                RutaImagen = memoryStream.ToArray()
+                //RutaImagen = memoryStream.ToArray()
+                RutaImagen = Dto.RutaImagen
             };
 
             if (!ModelState.IsValid)

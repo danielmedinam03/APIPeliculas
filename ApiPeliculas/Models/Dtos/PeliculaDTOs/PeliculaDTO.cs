@@ -11,7 +11,7 @@ namespace ApiPeliculas.Models.Dtos.PeliculaDTOs
         [Required(ErrorMessage = "El nombre es obligatorio")]
         [MaxLength(60, ErrorMessage = "El número máximo de caracteres es de 60")]
         public string Nombre { get; set; }
-        public IFormFile RutaImagen { get; set; }
+        public string RutaImagen { get; set; }
         [Required(ErrorMessage = "La descripción es obligatoria")]
         public string Descripcion { get; set; }
         [Required(ErrorMessage = "La duración es obligatoria")]

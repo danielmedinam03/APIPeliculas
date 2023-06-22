@@ -21,7 +21,7 @@ namespace ApiPeliculas.Controllers
         [AllowAnonymous]    
         [HttpGet]
         //[ResponseCache(Duration = 20)] LA PETICION RESPONDE EL CACHE POR 20 SEG
-        [ResponseCache(CacheProfileName = "PorDefecto20Seg")] //PROFILE DE CACHE
+        //[ResponseCache(CacheProfileName = "PorDefecto20Seg")] //PROFILE DE CACHE
         [ProducesResponseType(201, Type = typeof(CategoriaDTO))]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
