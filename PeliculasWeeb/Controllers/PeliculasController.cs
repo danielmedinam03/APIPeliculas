@@ -83,39 +83,25 @@ namespace PeliculasWeb.Controllers
 
             };
 
-            //if (ModelState.IsValid)
-            //{
-                //var files = HttpContext.Request.Form.Files;
-                //if (files.Count > 0)
-                //{
-                //    byte[] p1 = null;
-                //    using (var fs1 = files[0].OpenReadStream())
-                //    {
-                //        using (var ms1 = new MemoryStream())
-                //        {
-                //            fs1.CopyTo(ms1);
-                //            p1 = ms1.ToArray();
-                //        }
-                //    }
-                //    peliculaEntity.RutaImagen = p1;
-                //}
-                //else
-                //{
-                //    return View(objVM);
-                //}
+            
+            var data = await _repository.AddAsync(CT.RutaPeliculasApi, peliculaEntity, HttpContext.Session.GetString("JWToken"));
+            if (data is false)
+            {
+                TempData["alertDanger"] = "Usuario no autorizado para crear una pelicula";
+            }
+            if (data is true)
+            {
+                TempData["alertSuccess"] = "Pelicula creada con éxito !";
+            }
+            return RedirectToAction(nameof(Index));
 
-                await _repository.AddAsync(CT.RutaPeliculasApi, peliculaEntity, HttpContext.Session.GetString("JWToken"));
-                return RedirectToAction(nameof(Index));
-
-            //}
-            //return View(objVM);
         }
 
         [HttpGet]
         public async Task<IActionResult> Edit(int? Id)
         {
             IEnumerable<Categoria> npList = await _repositoryCategoria.GetAllAsync(CT.RutaCategoriasApi);
-            PeliculasVM objVM = new()
+            PeliculasEditVM objVM = new()
             {
                 ListaCategorias = npList.Select(x => new SelectListItem
                 {
@@ -123,7 +109,7 @@ namespace PeliculasWeb.Controllers
                     Value = x.Id.ToString()
                 }),
 
-                Pelicula = new Pelicula()
+                Pelicula = new PeliculasEditDTO()
 
             };
 
@@ -132,8 +118,26 @@ namespace PeliculasWeb.Controllers
                 return NotFound();
             }
             //Para mostrar los datos
+            Pelicula peliculaResponse = new();
+            peliculaResponse = await _repository.GetByIdAsync(CT.RutaPeliculasApi, Id.GetValueOrDefault());
 
-            objVM.Pelicula = await _repository.GetByIdAsync(CT.RutaPeliculasApi, Id.GetValueOrDefault());
+            //var peliculaArrayBytes = Convert.FromBase64String(peliculaResponse.RutaImagen);
+            //string outputPath = "C:\\Users\\KUBIT\\Desktop\\imagenPrueba.jpg";
+
+            //;
+
+            objVM.Pelicula = new PeliculasEditDTO()
+            {
+                Id = peliculaResponse.Id,
+                CategoriaId = peliculaResponse.CategoriaId,
+                Clasificacion = peliculaResponse.Clasificacion,
+                Descripcion = peliculaResponse.Descripcion,
+                Duracion = peliculaResponse.Duracion,
+                FechaCreacion = peliculaResponse.FechaCreacion,
+                Nombre = peliculaResponse.Nombre,
+                RutaImagen = peliculaResponse.RutaImagen
+            };
+
             if (objVM.Pelicula == null)
             {
                 return NotFound();
@@ -145,10 +149,16 @@ namespace PeliculasWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(PeliculaDTO pelicula)
         {
-            var memoryStream = new MemoryStream();
+            byte[] imagenPelicula = { };
 
-            pelicula.RutaImagen.CopyTo(memoryStream);
-            var imagenPelicula = memoryStream.ToArray();
+            if (pelicula.RutaImagen is not null)
+            {
+                var memoryStream = new MemoryStream();
+
+                pelicula.RutaImagen.CopyTo(memoryStream);
+                imagenPelicula = memoryStream.ToArray();
+            }
+            
 
             Pelicula peliculaEntity = new()
             {
@@ -175,33 +185,18 @@ namespace PeliculasWeb.Controllers
 
             };
 
-            //if (ModelState.IsValid)
-            //{
-                //var files = HttpContext.Request.Form.Files;
-                //if (files.Count > 0)
-                //{
-                //    byte[] p1 = null;
-                //    using (var fs1 = files[0].OpenReadStream())
-                //    {
-                //        using (var ms1 = new MemoryStream())
-                //        {
-                //            fs1.CopyTo(ms1);
-                //            p1 = ms1.ToArray();
-                //        }
-                //    }
-                //    pelicula.RutaImagen = p1;
-                //}
-                //else
-                //{
-                //    var peliculaDB = await _repository.GetByIdAsync(CT.RutaPeliculasApi, pelicula.Id);
-                //    pelicula.RutaImagen = peliculaDB.RutaImagen;
-                //}
+            var data = await _repository.UpdateAsync(CT.RutaPeliculasApi + pelicula.Id, peliculaEntity, HttpContext.Session.GetString("JWToken"));
+            if (data is false)
+            {
+                TempData["alertDanger"] = "Usuario no autorizado para editar una pelicula";
+            }
+            else if (data is true)
+            {
+                TempData["alertSuccess"] = "Pelicula editada con exito";
+            }
 
-                await _repository.UpdateAsync(CT.RutaPeliculasApi + pelicula.Id, peliculaEntity, HttpContext.Session.GetString("JWToken"));
-                return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index));
 
-            //}
-            //return RedirectToAction(nameof(Index));
         }
         [HttpDelete]
         public async Task<IActionResult> Delete(int Id)

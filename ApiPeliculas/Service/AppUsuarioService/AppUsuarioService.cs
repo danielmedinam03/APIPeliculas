@@ -4,6 +4,7 @@ using ApiPeliculas.Repository;
 using ApiPeliculas.Repository.IRepository;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -31,7 +32,9 @@ namespace ApiPeliculas.Service.AppUsuarioService
         }
         public async Task<IEnumerable<AppUsuario>> GetAllAsync()
         {
-            var data = await _appUsuarioRepository.GenericGetAllAsync(null,null,x => x.OrderBy(c => c.UserName));
+            var data = await _appUsuarioRepository.GenericGetAllAsync(null,null,
+                            x => x.OrderBy(c => c.UserName));
+            
             return data;
         }
 
@@ -84,7 +87,10 @@ namespace ApiPeliculas.Service.AppUsuarioService
                 Token = manejadorToken.WriteToken(token),
                 NombreUsuario = usuario.UserName,
                 Password = usuario.PasswordHash,
-                Id = usuario.Id
+                Id = usuario.Id,
+                Nombre = usuario.Nombre,
+                Rol = roles
+                
             };
             return usuarioRepuestaLoginDto;
         }
@@ -103,13 +109,16 @@ namespace ApiPeliculas.Service.AppUsuarioService
             if (result.Succeeded)
             {
                 //Solo la primera vez y es para crear los roles
-                if (!_roleManager.RoleExistsAsync("admin").GetAwaiter().GetResult())
-                {
-                    await _roleManager.CreateAsync(new IdentityRole("admin"));
-                    await _roleManager.CreateAsync(new IdentityRole("registrado"));
-                }
+                //if (!_roleManager.RoleExistsAsync("admin").GetAwaiter().GetResult())
+                //{
+                //    await _roleManager.CreateAsync(new IdentityRole("admin"));
+                //    await _roleManager.CreateAsync(new IdentityRole("registrado"));
+                //}
                 //A partir de la primera vez, cambiar el nombre del rol
-                await _userManager.AddToRoleAsync(usuario, "admin");
+                foreach (var rol in usuarioDto.Rol)
+                {
+                    await _userManager.AddToRoleAsync(usuario, rol);
+                }
                 var usuarioRetornado = await _appUsuarioRepository.GenericGetAsync(x => x, x => x.UserName == usuarioDto.NombreUsuario);
                 //  Opcion 1
                 //return new UsuarioDatoDTO()

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using PeliculasWeb.Domain.DTOs;
 using PeliculasWeb.Models;
 using PeliculasWeb.Repository.IRepository;
 using System.Net.Http;
@@ -46,7 +47,7 @@ namespace PeliculasWeb.Repository
 
         }
 
-        public async Task<bool> RegisterAsync(string url, UsuarioM itemCrear)
+        public async Task<bool> RegisterAsync(string url, UsuarioRegistroDTO itemCrear)
         {
             var request = new HttpRequestMessage(HttpMethod.Post, url);
 

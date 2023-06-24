@@ -94,7 +94,7 @@ namespace ApiPeliculas.Controllers
             return Ok(dataDto);
 
         }
-        //[Authorize(Roles ="admin")]
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ProducesResponseType(201, Type = typeof(PeliculaDTO))]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -137,7 +137,7 @@ namespace ApiPeliculas.Controllers
             var data = await _peliculaService.AddAsync(pelicula);
             return Ok(data);
         }
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         [HttpPatch("{Id}")]
         [ProducesResponseType(201, Type = typeof(PeliculaDTO))]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -162,15 +162,10 @@ namespace ApiPeliculas.Controllers
                 ModelState.AddModelError("", "La categoría no existe");
                 return StatusCode(404, ModelState);
             }
-            //if (await _peliculaService.ExistNameAsync(pelicula.Nombre))
-            //{
-            //    ModelState.AddModelError("", "Ya existe una categoria con ese nombre");
-            //    return StatusCode(404, ModelState);
-            //}
             var data = await _peliculaService.UpdateAsync(pelicula);
             return Ok(data);
         }
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         [HttpDelete("{Id}")]
         [ProducesResponseType(201, Type = typeof(PeliculaDTO))]
         [ProducesResponseType(StatusCodes.Status201Created)]

@@ -183,3 +183,7 @@ C:\Users\KUBIT\Documents\GitHub\MasterAPI\ApiPeliculas\obj\Debug\net6.0\refint\A
 C:\Users\KUBIT\Documents\GitHub\MasterAPI\ApiPeliculas\obj\Debug\net6.0\ApiPeliculas.pdb
 C:\Users\KUBIT\Documents\GitHub\MasterAPI\ApiPeliculas\obj\Debug\net6.0\ApiPeliculas.genruntimeconfig.cache
 C:\Users\KUBIT\Documents\GitHub\MasterAPI\ApiPeliculas\obj\Debug\net6.0\ref\ApiPeliculas.dll
+C:\Users\KUBIT\Documents\GitHub\MasterAPI\ApiPeliculas\bin\Debug\net6.0\EntityFramework.SqlServer.dll
+C:\Users\KUBIT\Documents\GitHub\MasterAPI\ApiPeliculas\bin\Debug\net6.0\EntityFramework.dll
+C:\Users\KUBIT\Documents\GitHub\MasterAPI\ApiPeliculas\bin\Debug\net6.0\Microsoft.AspNet.Identity.Core.dll
+C:\Users\KUBIT\Documents\GitHub\MasterAPI\ApiPeliculas\bin\Debug\net6.0\Microsoft.AspNet.Identity.EntityFramework.dll

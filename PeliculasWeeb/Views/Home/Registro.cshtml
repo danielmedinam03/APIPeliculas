@@ -6,15 +6,45 @@
 
 <h1 class="text-center">Registro de usuarios</h1>
 
+<div class="row mt-4">
+    <div class="col-sm-12">
+        @if (TempData["alertDanger"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" id="myAlert">
+                <h5> <strong>@TempData["alertDanger"]</strong> </h5>
+                <button type="button" class="close" data-dismiss="alert" arial-label="Close" onclick="closeAlert()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+        else if (TempData["alertSuccess"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert" id="myAlert">
+                <h5> <strong>@TempData["alertSuccess"]</strong> </h5>
+                <button type="button" class="close" data-dismiss="alert" arial-label="Close" onclick="closeAlert()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+    </div>
+</div>
+
 <div class="row">
     <div class="col-sm-6 offset-3">
         <form asp-action="Registro" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <label for="Nombre">Nombre:</label>
+                <input type="text" asp-for="Nombre" class="form-control" placeholder="Ingresa el Nombre" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
                 <label for="Usuario">Usuario:</label>
                 <input type="text" asp-for="NombreUsuario" class="form-control" placeholder="Ingresa el usuario" />
                 <span asp-validation-for="NombreUsuario" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label for="contrasena">Contraseña:</label>
                 <input type="password" asp-for="Password" class="form-control" placeholder="Ingresa la contraseña" />
@@ -26,3 +56,11 @@
 
     </div>
 </div>
+@section Scripts{
+    <script>
+        function closeAlert() {
+            var alertElement = document.getElementById('myAlert');
+            alertElement.style.display = 'none';
+        }
+    </script>
+}

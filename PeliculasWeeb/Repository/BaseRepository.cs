@@ -34,7 +34,7 @@ namespace PeliculasWeb.Repository
             }
             HttpResponseMessage response = await cliente.SendAsync(peticion);
 
-            if (response.StatusCode == System.Net.HttpStatusCode.Created)
+            if (response.StatusCode == System.Net.HttpStatusCode.Created || response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 return true;
             }
@@ -126,7 +126,7 @@ namespace PeliculasWeb.Repository
             }
             HttpResponseMessage response = await cliente.SendAsync(peticion);
 
-            if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 return true;
             }

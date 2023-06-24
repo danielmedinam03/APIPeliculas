@@ -31,7 +31,7 @@ namespace ApiPeliculas.Service.CategoriaService
 
         public async Task<bool> ExistNameAsync(string name)
         {
-            var data = await _categoriaRepository.ExistGenericAsync(x=>x.Nombre.ToLower().Trim() == name.ToLower().Trim());
+            var data = await _categoriaRepository.ExistGenericAsync(x=>x.Nombre == name);
             return data;
         }
 

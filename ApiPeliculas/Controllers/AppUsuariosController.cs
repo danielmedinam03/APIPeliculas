@@ -91,9 +91,10 @@ namespace ApiPeliculas.Controllers
             _respuestaApi.Result = data;
             return Ok(data);
         }
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
+        [AllowAnonymous]
         [HttpGet]
-        [ProducesResponseType(201, Type = typeof(PeliculaDTO))]
+        [ProducesResponseType(201, Type = typeof(UsuarioDTO))]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -108,7 +109,7 @@ namespace ApiPeliculas.Controllers
             }
             return Ok(listDTO);
         }
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         [HttpGet("{Id}")]
         [ProducesResponseType(201, Type = typeof(PeliculaDTO))]
         [ProducesResponseType(StatusCodes.Status201Created)]

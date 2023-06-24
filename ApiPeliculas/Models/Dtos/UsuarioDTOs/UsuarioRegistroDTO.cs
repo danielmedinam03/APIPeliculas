@@ -10,7 +10,7 @@ namespace ApiPeliculas.Models.Dtos.UsuarioDTOs
         public string Nombre { get; set; }
         [Required(ErrorMessage = "El password es obligatorio")]
         public string Password { get; set; }
-        public string Rol { get; set; }
+        public IEnumerable<string> Rol { get; set; } = new List<string>();
 
     }
 }

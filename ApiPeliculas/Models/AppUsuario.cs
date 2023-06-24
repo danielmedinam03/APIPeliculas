@@ -7,6 +7,6 @@ namespace ApiPeliculas.Models
     {
         //Añadir campos personalizados
         public string Nombre { get; set; }
-
+        public IEnumerable<string> Rol { get; set; } = new List<string>();
     }
 }

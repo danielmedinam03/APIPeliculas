@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using PeliculasWeb.Domain.DTOs;
 using PeliculasWeb.Models;
 using PeliculasWeb.Models.ViewModels;
 using PeliculasWeb.Repository.IRepository;
@@ -57,14 +58,19 @@ namespace PeliculasWeb.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(UsuarioM usuario)
+        public async Task<IActionResult> Login(UsuarioLoginDTO usuarioDto)
         {
+            UsuarioM usuario = new()
+            {
+                NombreUsuario = usuarioDto.NombreUsuario,
+                Password = usuarioDto.Password,
+            };
             if (ModelState.IsValid)
             {
                 UsuarioM objUser = await _accountRepository.LoginAsync(CT.RutaUsuariosApi + "Login", usuario);
                 if (objUser.token is null)
                 {
-                    TempData["alert"] = "Los datos son incorrectos";
+                    TempData["alertDanger"] = "Los datos son incorrectos";
                     return View();
                 }
 
@@ -74,7 +80,7 @@ namespace PeliculasWeb.Controllers
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
                 HttpContext.Session.SetString("JWToken", objUser.token);
-                TempData["alert"] = $"Bienvenido/a  {objUser.NombreUsuario}!";
+                TempData["alertSuccess"] = $"Bienvenido/a  {objUser.NombreUsuario}!";
                 return RedirectToAction(nameof(Index));
 
             }
@@ -97,14 +103,17 @@ namespace PeliculasWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Registro(UsuarioM usuario)
+        public async Task<IActionResult> Registro(UsuarioRegistroDTO usuarioDto)
         {
-            bool result = await _accountRepository.RegisterAsync(CT.RutaUsuariosApi + "Registro",usuario);
+            usuarioDto.Rol = new List<string>() { "registrado" };
+            
+            bool result = await _accountRepository.RegisterAsync(CT.RutaUsuariosApi + "Registro",usuarioDto);
             if (!result)
             {
+                TempData["alertDanger"] = "Ha ocurrido un error a la hora de registrarse, verfique sus campos e intentelo de nuevo";
                 return View();
             }
-            TempData["alert"] = "Registro correcto !";
+            TempData["alertSuccess"] = "Registro correcto !";
             return RedirectToAction(nameof(Login));
         }
 

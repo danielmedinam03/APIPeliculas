@@ -93,21 +93,21 @@ namespace ApiPeliculas.Service.UsuarioService
             return usuarioLoginRespuestaDTO;
         }
 
-        public async Task<Usuario> Registro(UsuarioRegistroDTO usuarioDto)
-        {
-            var passEncriptada = obtenermd5(usuarioDto.Password);
-            Usuario usuario = new()
-            {
-                NombreUsuario = usuarioDto.NombreUsuario,
-                Password = passEncriptada,
-                Nombre = usuarioDto.Nombre,
-                Rol = usuarioDto.Rol
-            };
+        //public async Task<Usuario> Registro(UsuarioRegistroDTO usuarioDto)
+        //{
+        //    var passEncriptada = obtenermd5(usuarioDto.Password);
+        //    Usuario usuario = new()
+        //    {
+        //        NombreUsuario = usuarioDto.NombreUsuario,
+        //        Password = passEncriptada,
+        //        Nombre = usuarioDto.Nombre,
+        //        Rol = usuarioDto.Rol
+        //    };
 
-            await _usuarioRepository.AddAsync(usuario);
-            usuario.Password = passEncriptada;
-            return usuario;
-        }
+        //    await _usuarioRepository.AddAsync(usuario);
+        //    usuario.Password = passEncriptada;
+        //    return usuario;
+        //}
 
         public static string obtenermd5(string valor)
         {
@@ -129,6 +129,11 @@ namespace ApiPeliculas.Service.UsuarioService
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
         public Task<Usuario> GetByIdAsync(string Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Usuario> Registro(UsuarioRegistroDTO usuarioDto)
         {
             throw new NotImplementedException();
         }

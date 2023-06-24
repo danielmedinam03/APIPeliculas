@@ -34,7 +34,17 @@ namespace PeliculasWeb.Controllers
         {
             if (ModelState.IsValid) 
             {
-                await _categoriaRepository.AddAsync(CT.RutaCategoriasApi,categoria,HttpContext.Session.GetString("JWToken"));
+                var data = await _categoriaRepository.AddAsync(CT.RutaCategoriasApi,categoria,HttpContext.Session.GetString("JWToken"));
+                if (data is false)
+                {
+                    TempData["alertDanger"] = "Usuario no autorizado para crear una categoría";
+                    
+                }
+                if (data is true)
+                {
+                    TempData["alertSuccess"] = "Categoria creada con éxito !";
+                    
+                }
                 return RedirectToAction(nameof(Index));
             }
             return View();
@@ -60,7 +70,16 @@ namespace PeliculasWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _categoriaRepository.UpdateAsync(CT.RutaCategoriasApi + categoria.Id, categoria, HttpContext.Session.GetString("JWToken"));
+                var data = await _categoriaRepository.UpdateAsync(CT.RutaCategoriasApi + categoria.Id, categoria, HttpContext.Session.GetString("JWToken"));
+                if (data is false)
+                {
+                    TempData["alertDanger"] = "Usuario no autorizado para editar una categoría";
+                }
+                if (data is true)
+                {
+                    TempData["alertSuccess"] = "Categoría actualizada con éxito !";
+                }
+
                 return RedirectToAction(nameof(Index));
             }
             return View();

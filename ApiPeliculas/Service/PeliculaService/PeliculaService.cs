@@ -79,7 +79,17 @@ namespace ApiPeliculas.Service.PeliculaService
 
         public async Task<bool> UpdateAsync(Pelicula entity)
         {
-            var data = await _peliculaRepository.UpdateGenericAsync(entity);
+            bool data = false;
+            if (String.IsNullOrEmpty(entity.RutaImagen))
+            {
+                data = await _peliculaRepository.UpdateGenericAsync(entity, true,
+                    x => x.Clasificacion, x => x.CategoriaId,x => x.Descripcion,
+                    x => x.Duracion, x => x.Nombre);
+            }
+            else
+            {
+                data = await _peliculaRepository.UpdateGenericAsync(entity, true);
+            }
             return data;
         }
     }

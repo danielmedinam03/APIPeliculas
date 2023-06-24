@@ -10,12 +10,6 @@ namespace ApiPeliculas.Models.Dtos.CategoriaDTOs
         [MaxLength(60, ErrorMessage ="El número máximo de caracteres es de 60")]
         public string Nombre { get; set; }
         //[JsonIgnore]
-        //public DateTime FechaCreacion 
-        //{
-        //    get
-        //    {
-        //        return DateTime.Now;
-        //    }
-        //}
+        public DateTime FechaCreacion { get; set; }
     }
 }
